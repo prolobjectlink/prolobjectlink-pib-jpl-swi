@@ -21,6 +21,7 @@
  */
 package io.github.prolobjectlink.prolog.jpl.swi;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +44,7 @@ import io.github.prolobjectlink.prolog.AbstractBenchmarkRunner;
 import io.github.prolobjectlink.prolog.BenchmarkRunner;
 import io.github.prolobjectlink.prolog.Prolog;
 import io.github.prolobjectlink.prolog.PrologEngine;
+import io.github.prolobjectlink.prolog.PrologList;
 import io.github.prolobjectlink.prolog.PrologProvider;
 import io.github.prolobjectlink.prolog.PrologQuery;
 import io.github.prolobjectlink.prolog.PrologTerm;
@@ -202,6 +204,29 @@ public class SwiBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 
 			);
 
+			engine.assertz(provider.newStructure("p", provider.newAtom("a")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("a"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("s", provider.newAtom("a"))));
+			engine.assertz(provider.newStructure("p", provider.newAtom("b")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("b"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("t", provider.newAtom("b"))));
+			engine.assertz(provider.newStructure("p", provider.newAtom("c")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("c"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("u", provider.newAtom("c"))));
+			engine.assertz(provider.newStructure("p", provider.newAtom("d")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("d"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("v", provider.newAtom("d"))));
+			engine.assertz(provider.newStructure("p", provider.newAtom("e")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("e"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("w", provider.newAtom("e"))));
+			engine.assertz(provider.newStructure("p", provider.newAtom("f")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("f"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("x", provider.newAtom("f"))));
+			engine.assertz(provider.newStructure("p", provider.newAtom("g")));
+			engine.assertz(provider.newStructure("p", provider.newList(provider.newAtom("g"))));
+			engine.assertz(provider.newStructure("p", provider.newStructure("y", provider.newAtom("g"))));
+
+			// boresea
 			engine.assertz(provider.newAtom("boresea"), provider.newAtom("lips1"));
 			engine.assertz(provider.newAtom("lips1"), provider.newAtom("lips2"));
 			engine.assertz(provider.newAtom("lips2"), provider.newAtom("lips3"));
@@ -404,6 +429,26 @@ public class SwiBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 			engine.assertz(provider.newAtom("lips199"), provider.newAtom("lips200"));
 			engine.assertz(provider.newAtom("lips200"));
 
+			// cut
+			String cutt1 = "cutt1";
+			PrologTerm cut = provider.prologCut();
+			PrologTerm x = provider.newVariable("X", 0);
+			PrologTerm l = provider.newVariable("L", 1);
+			PrologTerm[] arguments = new PrologTerm[100];
+			Arrays.fill(arguments, provider.newInteger(100));
+			PrologList list = provider.newList(arguments);
+			PrologTerm exp1 = provider.newStructure(x, "=", provider.newInteger(100));
+			PrologTerm exp2 = provider.newStructure(x, ">", provider.newInteger(100));
+			PrologTerm xl = provider.newList(provider.newVariable("X", 0), provider.newVariable("L", 1));
+			engine.assertz(provider.newAtom("cut_100_times"), provider.newStructure(cutt1, list));
+			engine.assertz(provider.newStructure(cutt1, provider.prologEmpty()));
+			engine.assertz(provider.newStructure(cutt1, xl), provider.newStructure(cutt1, exp1),
+					provider.newStructure(cutt1, cut), provider.newStructure(cutt1, l));
+			engine.assertz(provider.newStructure(cutt1, xl), provider.newStructure(cutt1, exp2),
+					provider.newStructure(cutt1, l));
+
+			
+
 		}
 	}
 
@@ -460,6 +505,14 @@ public class SwiBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public void boresea(ExecutionPlan plan) {
 		plan.engine.query("boresea").oneSolution();
+	}
+
+	@Benchmark
+	@Fork(value = 1, warmups = 0)
+	@BenchmarkMode(Mode.AverageTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	public void cut100Times(ExecutionPlan plan) {
+		plan.engine.query("cut_100_times").oneSolution();
 	}
 
 	public static void main(String[] args) throws RunnerException {
