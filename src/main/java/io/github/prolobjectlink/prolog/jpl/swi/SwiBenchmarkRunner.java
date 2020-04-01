@@ -447,7 +447,114 @@ public class SwiBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 			engine.assertz(provider.newStructure(cutt1, xl), provider.newStructure(cutt1, exp2),
 					provider.newStructure(cutt1, l));
 
-			
+			// enviroment
+			engine.assertz(provider.newAtom("enviroment"), provider.newStructure("env0", provider.newVariable("X", 0),
+					provider.newVariable("Y", 1), provider.newVariable("Z", 2)));
+
+			engine.assertz(
+					provider.newStructure("env0", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env1", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env2", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+
+			engine.assertz(
+					provider.newStructure("env1", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env3", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env4", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env2", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env3", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env4", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env3", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env5", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env6", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env4", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env5", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env6", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env5", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env7", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env8", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env6", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env7", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env8", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env7", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env9", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env10", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env8", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env9", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env10", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env9", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env11", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env12", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env10", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env12", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env12", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(
+					provider.newStructure("env11", provider.newVariable("X", 0), provider.newVariable("Y", 1),
+							provider.newVariable("Z", 2)), // :-
+					provider.newStructure("env12", provider.newVariable("Z", 0), provider.newVariable("Y", 1),
+							provider.newVariable("X", 2)),
+					provider.newStructure("env12", provider.newVariable("Y", 0), provider.newVariable("Z", 1),
+							provider.newVariable("X", 2)));
+			engine.assertz(provider.newStructure("env12", provider.newVariable("_X", 0), provider.newVariable("_Y", 1),
+					provider.newVariable("_Z", 2)));
+
+			engine.assertz(provider.newAtom("enviroment0ar"), provider.newAtom("env0_0"));
+
+			engine.assertz(provider.newAtom("env0_0"), provider.newAtom("env1_0"), provider.newAtom("env2_0"));
+			engine.assertz(provider.newAtom("env1_0"), provider.newAtom("env3_0"), provider.newAtom("env4_0"));
+			engine.assertz(provider.newAtom("env2_0"), provider.newAtom("env3_0"), provider.newAtom("env4_0"));
+			engine.assertz(provider.newAtom("env3_0"), provider.newAtom("env5_0"), provider.newAtom("env6_0"));
+			engine.assertz(provider.newAtom("env4_0"), provider.newAtom("env5_0"), provider.newAtom("env6_0"));
+			engine.assertz(provider.newAtom("env5_0"), provider.newAtom("env7_0"), provider.newAtom("env8_0"));
+			engine.assertz(provider.newAtom("env6_0"), provider.newAtom("env7_0"), provider.newAtom("env8_0"));
+			engine.assertz(provider.newAtom("env7_0"), provider.newAtom("env9_0"), provider.newAtom("env10_0"));
+			engine.assertz(provider.newAtom("env8_0"), provider.newAtom("env9_0"), provider.newAtom("env10_0"));
+			engine.assertz(provider.newAtom("env9_0"), provider.newAtom("env11_0"), provider.newAtom("env12_0"));
+			engine.assertz(provider.newAtom("env10_0"), provider.newAtom("env12_0"), provider.newAtom("env12_0"));
+			engine.assertz(provider.newAtom("env11_0"), provider.newAtom("env12_0"), provider.newAtom("env12_0"));
+
+			engine.assertz(provider.newAtom("env12_0"));
 
 		}
 	}
@@ -474,29 +581,7 @@ public class SwiBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 	@BenchmarkMode(Mode.AverageTime)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public void indexClause(ExecutionPlan plan) {
-
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("a")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("a"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("s", plan.provider.newAtom("a"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("b")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("b"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("t", plan.provider.newAtom("b"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("c")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("c"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("u", plan.provider.newAtom("c"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("d")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("d"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("v", plan.provider.newAtom("d"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("e")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("e"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("w", plan.provider.newAtom("e"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("f")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("f"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("x", plan.provider.newAtom("f"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newAtom("g")));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newList(plan.provider.newAtom("g"))));
-		plan.engine.query(plan.provider.newStructure("p", plan.provider.newStructure("y", plan.provider.newAtom("g"))));
-
+		plan.engine.query("index_clause").oneSolution();
 	}
 
 	@Benchmark
@@ -513,6 +598,22 @@ public class SwiBenchmarkRunner extends AbstractBenchmarkRunner implements Bench
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	public void cut100Times(ExecutionPlan plan) {
 		plan.engine.query("cut_100_times").oneSolution();
+	}
+
+	@Benchmark
+	@Fork(value = 1, warmups = 0)
+	@BenchmarkMode(Mode.AverageTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	public void enviroment(ExecutionPlan plan) {
+		plan.engine.query("enviroment").oneSolution();
+	}
+
+	@Benchmark
+	@Fork(value = 1, warmups = 0)
+	@BenchmarkMode(Mode.AverageTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	public void enviroment0Arg(ExecutionPlan plan) {
+		plan.engine.query("enviroment0ar").oneSolution();
 	}
 
 	public static void main(String[] args) throws RunnerException {
